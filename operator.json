@@ -1,9 +1,9 @@
 {
-  "name": "Template_R_operator",
-  "description": "Calculate the mathematical average of the data points in a cell.",
-  "tags": ["basic statistics"],
+  "name": "Gating to Reference",
+  "description": "Generate a Population-Marker Map based on a manual gating strategy.",
+  "tags": ["flow cytometry", "annotation"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/template-R-operator-lite"],
+  "urls": ["https://github.com/tercen/gating_to_reference_operator"],
   "properties": []
 }
 
