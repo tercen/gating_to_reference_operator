@@ -49,8 +49,8 @@ mk_list <- apply(paths_filled, 1, function(x) {
 
 
 # Mask data (option)
-sc_out <- scaled[idx, ]
 idx <- paste0(ds_gating$model$operatorSettings$namespace, ".", paths_filled[, ncol(paths_filled)])
+sc_out <- scaled[idx, ]
 cn <- unlist(lapply(strsplit(colnames(sc_out), "\\."), "[", 2))
 for(i in 1:nrow(paths_filled)) {
   sc_out[i, !colnames(sc_out) %in% mk_list[[i]]] <- NA
