@@ -38,7 +38,7 @@ get_data_step <- function(ctx) {
 
 get_gating_step <- function(ctx, id = 1) {
   wf <- ctx$client$workflowService$get(get_workflow_id(ctx))
-  ds <- Find(function(s) !is.null(s$model$operatorSettings$operatorModel$roots), wf$steps)[[id]]
+  ds <- Find(function(s) !is.null(s$model$operatorSettings$operatorModel$roots), wf$steps)
   return(ds)
 }
 
