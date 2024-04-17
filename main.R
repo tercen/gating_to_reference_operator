@@ -23,8 +23,8 @@ colnames(mat) <- df_col$col_names
 rownames(mat) <- df_row$row_names
 
 scaled <- apply(mat, 2, function(x) {
-  min_val <- min(x)
-  max_val <- max(x)
+  min_val <- min(x, na.rm = TRUE)
+  max_val <- max(x, na.rm = TRUE)
   scaled <- (x - min_val) / (max_val - min_val) * 2 - 1
   return(scaled)
 })
@@ -51,12 +51,13 @@ mk_list <- apply(paths_filled, 1, function(x) {
 # Mask data (option)
 idx <- paste0(ds_gating$model$operatorSettings$namespace, ".", paths_filled[, ncol(paths_filled)])
 sc_out <- scaled[idx, ]
-cn <- unlist(lapply(strsplit(colnames(sc_out), "\\."), "[", 2))
 for(i in 1:nrow(paths_filled)) {
   sc_out[i, !colnames(sc_out) %in% mk_list[[i]]] <- NA
 }
-colnames(sc_out) <- cn
-
+if(all(grepl("\\.", colnames(sc_out)))) {
+  cn <- unlist(lapply(strsplit(colnames(sc_out), "\\."), "[", 2))
+  colnames(sc_out) <- cn
+}
 
 colnames(paths_filled)[length(colnames(paths_filled))] <- "Population"
 out <- bind_cols(as_tibble(paths_filled), as_tibble(sc_out[idx, ]))
